@@ -1,0 +1,50 @@
+server:
+  port: 8081
+  ssl:
+    enabled: true
+    key-alias: professor
+    key-store: classpath:professor-ssl.p12
+    key-store-type: PKCS12
+    key-password: 123456
+    key-store-password: 123456
+
+Angular:
+  URL: http://localhost:4200
+spring:
+  application:
+    name: DigitalCard
+  datasource:
+    username: ${DATABASE_USERNAME:root}
+    password: ${DATABASE_PASSWORD:mh571536@RootPassword}
+    url: jdbc:mysql://${DATABASE_URL:localhost:3306/digitalcard}
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
+    hibernate:
+      ddl-auto: update
+#Kafka Configuration
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    instance-id: ${spring.application.name}:${random.uuid}
+#JwtConfiguration
+application:
+  jwt:
+    secretKey: secureq1w2e3r4t5y6u7i8o9p0a!s@d#fkjkjkjk
+    tokenPrefix: Bearer
+    tokenExpirationAfterDays: 14
+
+
+
